@@ -1,0 +1,19 @@
+export type ContactType = 'fisica' | 'juridica';
+
+export interface Contact {
+  id: string;
+  type: ContactType;
+  name: string;
+  nickname: string;
+  email: string;
+  mobile: string;
+  phone: string;
+  nid: string;
+  ssn: string;
+  address_street: string;
+  address_number: string;
+  address_extra: string;
+  district: string;
+  city: string;
+  zipcode: string;
+}
