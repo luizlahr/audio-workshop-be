@@ -1,0 +1,22 @@
+model Contact {
+  id             String    @id @default(uuid())
+  type           String
+  name           String
+  nickname       String?
+  email          String?   @unique
+  mobile         String?
+  phone          String?
+  nid            String?
+  ssn            String?
+  address_street String?
+  address_number String?
+  address_extra  String?
+  district       String?
+  city           String?
+  zipcode        String?
+  created_at     DateTime? @default(now())
+  updated_at     DateTime? @updatedAt
+  deleted_at     DateTime?
+
+  @@map("contacts")
+}
