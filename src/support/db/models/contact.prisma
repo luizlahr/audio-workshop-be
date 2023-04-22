@@ -1,9 +1,9 @@
 model Contact {
-  id             String  @id @default(uuid())
+  id             String    @id @default(uuid())
   type           String
   name           String
   nickname       String?
-  email          String? @unique
+  email          String?   @unique
   mobile         String?
   phone          String?
   nid            String?
@@ -14,10 +14,9 @@ model Contact {
   district       String?
   city           String?
   zipcode        String?
-
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at     DateTime? @default(now())
+  updated_at     DateTime? @updatedAt
+  deleted_at     DateTime?
 
   @@map("contacts")
 }

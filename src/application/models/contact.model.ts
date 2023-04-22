@@ -1,58 +1,61 @@
-import {
-  ContactType as IContactType,
-  Contact as IContact,
-} from '@domain/contact/models/Contact';
+import { Contact as IContact } from '@domain/contact/models/Contact';
 import { Field, ObjectType } from '@nestjs/graphql';
-
-enum ContactType {
-  'fisica',
-  'juridica',
-}
+import { IsIn } from 'class-validator';
 
 @ObjectType()
 export class Contact implements IContact {
   @Field()
   id: string;
 
-  @Field((type) => ContactType)
-  type: IContactType;
+  @Field()
+  @IsIn(['fisica', 'juridica'])
+  type: string;
 
   @Field()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   nickname: string;
 
-  @Field()
+  @Field({ nullable: true })
   email: string;
 
-  @Field()
+  @Field({ nullable: true })
   mobile: string;
 
-  @Field()
+  @Field({ nullable: true })
   phone: string;
 
-  @Field()
+  @Field({ nullable: true })
   nid: string;
 
-  @Field()
+  @Field({ nullable: true })
   ssn: string;
 
-  @Field()
+  @Field({ nullable: true })
   address_street: string;
 
-  @Field()
+  @Field({ nullable: true })
   address_number: string;
 
-  @Field()
+  @Field({ nullable: true })
   address_extra: string;
 
-  @Field()
+  @Field({ nullable: true })
   district: string;
 
-  @Field()
+  @Field({ nullable: true })
   city: string;
 
-  @Field()
+  @Field({ nullable: true })
   zipcode: string;
+
+  @Field()
+  created_at: Date;
+
+  @Field()
+  updated_at: Date;
+
+  @Field({ nullable: true })
+  deleted_at: Date;
 }
