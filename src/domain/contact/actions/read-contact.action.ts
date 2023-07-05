@@ -11,7 +11,6 @@ export class ReadContact {
     const contact = await this.contactRepository.getById(contactId);
 
     if (!contact) {
-      console.log('HERE');
       throw new ContactNotFoundError();
     }
 

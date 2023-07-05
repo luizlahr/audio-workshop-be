@@ -1,3 +1,4 @@
+import { IsPublic } from '@application/decorators/is-public-decorator';
 import { JwtAuthGuard } from '@application/guards/jwt-auth.guard';
 import { CreateContactInput } from '@application/inputs/contact/create-contact.input';
 import { UpdateContactInput } from '@application/inputs/contact/update-contact.input';
@@ -7,7 +8,6 @@ import { DeleteContact } from '@domain/contact/actions/delete-contact.action';
 import { ListContacts } from '@domain/contact/actions/list-contact.action';
 import { ReadContact } from '@domain/contact/actions/read-contact.action';
 import { UpdateContact } from '@domain/contact/actions/update-contact.action';
-import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver(() => Contact)
@@ -21,13 +21,12 @@ export class ContactResolver {
   ) {}
 
   @Query(() => [Contact], { name: 'contacts' })
-  @UseGuards(JwtAuthGuard)
   list() {
     return this.listContacts.handle();
   }
 
   @Query(() => Contact, { name: 'contact' })
-  async read(@Args('contactId') contactId: string) {
+  read(@Args('contactId') contactId: string) {
     return this.readContact.handle(contactId);
   }
 
