@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { AccessTokenDTO } from '../dtos/access-token';
 import { User } from '@domain/user/models/user';
 import { JwtGenerator } from '@domain/common/services/jwt-generator.service';
 
 @Injectable()
-export class Login {
+export class SignOut {
   constructor(private jwtService: JwtGenerator) {}
 
   public async handle(user: User): Promise<string> {

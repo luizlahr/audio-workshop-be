@@ -3,7 +3,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
 
 @InputType()
-export class LoginUserInput implements LoginDTO {
+export class SignInInput implements LoginDTO {
   @IsEmail({}, { message: 'email inválido' })
   @Field()
   email: string;

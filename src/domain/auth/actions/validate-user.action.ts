@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { LoginDTO } from '../dtos/login.dto';
 import { UnauthorizedError } from '@domain/common/errors/unauthorized.error';
 import { Hasher } from '@domain/common/services/hasher.service';
+import { InvalidCredentialsError } from '../errors/invalid-credentials.error';
 
 @Injectable()
 export class ValidateUser {
@@ -16,7 +17,7 @@ export class ValidateUser {
     const user = await this.userRepository.getByEmail(email);
 
     if (!user || !this.hashService.check(password, user.password)) {
-      throw new UnauthorizedError('dados de acesso inválidos');
+      throw new InvalidCredentialsError();
     }
 
     return user;

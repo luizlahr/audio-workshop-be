@@ -1,13 +1,6 @@
 import { CreateUserDTO } from '@domain/user/dtos/create-user.dto';
 import { Field, InputType } from '@nestjs/graphql';
-import {
-  IsEmail,
-  IsNotEmpty,
-  Max,
-  MaxLength,
-  Min,
-  MinLength,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 @InputType()
 export class CreateUserInput implements CreateUserDTO {

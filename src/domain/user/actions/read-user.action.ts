@@ -11,7 +11,6 @@ export class ReadUser {
     const user = await this.userRepository.getById(userId);
 
     if (!user) {
-      console.log('HERE');
       throw new UserNotFoundError();
     }
 
