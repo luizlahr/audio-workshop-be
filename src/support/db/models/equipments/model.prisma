@@ -1,0 +1,13 @@
+model Model {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  brand_id    String
+  category_id String
+  brand       Brand     @relation(fields: [brand_id], references: [id])
+  category    Category  @relation(fields: [category_id], references: [id])
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  deleted_at  DateTime?
+
+  @@map("equipment_models")
+}

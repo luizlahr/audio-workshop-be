@@ -1,0 +1,17 @@
+model Order {
+  id          Int         @id @default(autoincrement())
+  user_id     String
+  user        User        @relation(fields: [user_id], references: [id])
+  customer_id String
+  customer    Contact     @relation(fields: [customer_id], references: [id])
+  accessories String?
+  problem     String?
+  notes       String?
+  status      String      @default("draft")
+  items       OrderItem[]
+  created_at  DateTime?   @default(now())
+  updated_at  DateTime?   @updatedAt
+  deleted_at  DateTime?
+
+  @@map("orders")
+}

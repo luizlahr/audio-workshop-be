@@ -1,0 +1,13 @@
+model OrderItem {
+  id            String    @id @default(uuid())
+  order_id      Int
+  order         Order     @relation(fields: [order_id], references: [id])
+  model_id      String
+  model         Model     @relation(fields: [model_id], references: [id])
+  serial_number String
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @updatedAt
+  deleted_at    DateTime?
+
+  @@map("order_items")
+}
