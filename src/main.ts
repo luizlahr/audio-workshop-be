@@ -1,8 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { PrismaService } from '@support/services/prisma.service';
-import { ValidationPipe } from '@nestjs/common';
 import { ValidationErrorFactory } from '@application/errors/validation-error.factory';
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { PrismaService } from '@support/services/prisma.service';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +14,11 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+
+  app.enableCors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  });
 
   await app.listen(process.env.APP_PORT);
 
