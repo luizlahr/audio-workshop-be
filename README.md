@@ -81,9 +81,9 @@
 │   │   │   ├── errors
 │   │   │   ├── models
 │   │   │   ├── repositories
-│   ├── equipment
-│   ├── order
-│   ├── user
+│   │   ├── equipment
+│   │   ├── order
+│   │   ├── user
 │   ├── support
 │   │   ├── db
 │   │   │   ├── models
