@@ -1,4 +1,4 @@
-<h1>Audio Workshop Management App</h1>
+<h1>Audio Workshop Management App (Backend)</h1>
 
 <p>A Node.js project built with NestJS, Prisma, GraphQL, Apollo Server, JWT, Passport, TypeScript, and Docker.</p>
 
