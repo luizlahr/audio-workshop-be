@@ -1,5 +1,3 @@
-import { CreateContactDTO } from '@domain/contact/dtos/create-contact.dto';
-import { UpdateContactDTO } from '@domain/contact/dtos/update-contact.dto';
 import { Contact } from '@domain/contact/models/Contact';
 import { ContactRepository } from '@domain/contact/repositories/contact.repository';
 import { Injectable } from '@nestjs/common';

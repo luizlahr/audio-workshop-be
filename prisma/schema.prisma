@@ -12,29 +12,101 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  // directUrl         = env("DIRECT_URL")
 }
 
 model Contact {
-  id             String    @id @default(uuid())
-  type           String
-  name           String
-  nickname       String?
-  email          String?   @unique
-  mobile         String?
-  phone          String?
-  nid            String?
-  ssn            String?
-  address_street String?
-  address_number String?
-  address_extra  String?
-  district       String?
-  city           String?
-  zipcode        String?
-  created_at     DateTime? @default(now())
-  updated_at     DateTime? @updatedAt
-  deleted_at     DateTime?
+  id            String    @id @default(uuid())
+  type          String
+  name          String
+  nickname      String?
+  email         String?   @unique
+  mobile        String?
+  phone         String?
+  nid           String?
+  ssn           String?
+  addressStreet String?
+  addressNumber String?
+  addressExtra  String?
+  district      String?
+  city          String?
+  zipcode       String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  deleted_at    DateTime?
+  Order         Order[]
 
   @@map("contacts")
+}
+
+model Brand {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+  Model      Model[]
+
+  @@map("equipment_brands")
+}
+
+model Category {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+  Model      Model[]
+
+  @@map("equipment_categories")
+}
+
+model Model {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  brand_id    String
+  category_id String
+  brand       Brand       @relation(fields: [brand_id], references: [id])
+  category    Category    @relation(fields: [category_id], references: [id])
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  deleted_at  DateTime?
+  OrderItem   OrderItem[]
+
+  @@map("equipment_models")
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  user_id     String
+  user        User        @relation(fields: [user_id], references: [id])
+  customer_id String
+  customer    Contact     @relation(fields: [customer_id], references: [id])
+  accessories String?
+  problem     String?
+  notes       String?
+  status      String      @default("draft")
+  items       OrderItem[]
+  created_at  DateTime?   @default(now())
+  updated_at  DateTime?   @updatedAt
+  deleted_at  DateTime?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id            String    @id @default(uuid())
+  order_id      Int
+  order         Order     @relation(fields: [order_id], references: [id])
+  model_id      String
+  model         Model     @relation(fields: [model_id], references: [id])
+  serial_number String
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @updatedAt
+  deleted_at    DateTime?
+
+  @@map("order_items")
 }
 
 model User {
@@ -45,6 +117,7 @@ model User {
   created_at DateTime? @default(now())
   updated_at DateTime? @updatedAt
   deleted_at DateTime?
+  Order      Order[]
 
   @@map("users")
 }

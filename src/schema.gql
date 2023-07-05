@@ -2,6 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: String!
+  name: String!
+  email: String
+  password: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
 type Contact {
   id: String!
   type: String!
@@ -23,30 +43,79 @@ type Contact {
   deleted_at: DateTime
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type User {
+type Brand {
   id: String!
   name: String!
-  email: String
-  password: String!
   created_at: DateTime!
   updated_at: DateTime!
   deleted_at: DateTime
 }
 
-type LoginResponse {
-  access_token: String!
+type Category {
+  id: String!
+  name: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime
+}
+
+type Model {
+  id: String!
+  name: String!
+  category_id: String!
+  brand_id: String!
+  category: Category!
+  brand: Brand!
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime
+}
+
+type OrderItem {
+  id: String!
+  model_id: String!
+  model: Model!
+  serial_number: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime
+}
+
+type Order {
+  id: Float!
+  user_id: String!
   user: User!
+  customer_id: String!
+  customer: Contact!
+  accessories: String
+  problem: String
+  notes: String
+  status: String!
+  items: [OrderItem!]
+  created_at: DateTime!
+  updated_at: DateTime!
+  deleted_at: DateTime
 }
 
 type Query {
   contacts: [Contact!]!
   contact(contactId: String!): Contact!
   user(userId: String!): User!
+  users: [User!]!
+  orders: [Order!]!
+  order(orderId: Float!): Order!
+  healthy: String!
+  brands: [Brand!]!
+  brand(brandId: String!): Brand!
+  categories: [Category!]!
+  category(categoryId: String!): Category!
+  models: [Model!]!
+  modelByBrandAndCategory(modelId: BrandAndCategoryInput!): Model!
+}
+
+input BrandAndCategoryInput {
+  brand_id: String!
+  category_id: String!
 }
 
 type Mutation {
@@ -54,19 +123,45 @@ type Mutation {
   updateContact(contactId: String!, data: UpdateContactInput!): Contact!
   deleteContact(contactId: String!): String
   createUser(data: CreateUserInput!): User!
-  login(data: LoginUserInput!): LoginResponse!
+  createOrder(data: CreateOrderInput!): Order!
+  signIn(data: SignInInput!): LoginResponse!
+  createBrand(data: CreateBrandInput!): Brand!
+  createCategory(data: CreateCategoryInput!): Category!
+  createModel(data: CreateModelInput!): Model!
 }
 
 input CreateContactInput {
-  name: String!
-  type: String!
-  email: String!
+  email: String
+  nickname: String
+  mobile: String
+  phone: String
+  nid: String
+  ssn: String
+  address_street: String
+  address_number: String
+  address_extra: String
+  district: String
+  city: String
+  zipcode: String
+  name: String
+  type: String = "fisica"
 }
 
 input UpdateContactInput {
-  name: String
-  type: String
   email: String
+  nickname: String
+  mobile: String
+  phone: String
+  nid: String
+  ssn: String
+  address_street: String
+  address_number: String
+  address_extra: String
+  district: String
+  city: String
+  zipcode: String
+  name: String!
+  type: String!
 }
 
 input CreateUserInput {
@@ -75,7 +170,34 @@ input CreateUserInput {
   password: String!
 }
 
-input LoginUserInput {
+input CreateOrderInput {
+  customer_id: String!
+  items: [OrderItemInput!]!
+  accessories: String
+  problem: String
+  notes: String
+}
+
+input OrderItemInput {
+  model_id: String!
+  serial_number: String!
+}
+
+input SignInInput {
   email: String!
   password: String!
+}
+
+input CreateBrandInput {
+  name: String
+}
+
+input CreateCategoryInput {
+  name: String
+}
+
+input CreateModelInput {
+  name: String
+  brand_id: String
+  category_id: String
 }

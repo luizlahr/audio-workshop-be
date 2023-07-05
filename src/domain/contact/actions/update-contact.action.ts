@@ -13,7 +13,6 @@ export class UpdateContact {
     contactId: string,
     contactData: CreateContactDTO,
   ): Promise<Contact> {
-    console.log(contactData);
     const checkContactId = await this.contactRepository.getById(contactId);
     if (!checkContactId) {
       throw new ContactNotFoundError();

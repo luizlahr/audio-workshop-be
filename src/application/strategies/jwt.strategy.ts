@@ -1,3 +1,4 @@
+import { CheckUser } from '@domain/auth/actions/check-user.action';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt } from 'passport-jwt';
@@ -5,7 +6,7 @@ import { Strategy } from 'passport-jwt';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private checkUser: CheckUser) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -14,7 +15,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
-    return { userId: payload.sub, email: payload.email };
+  async validate({ sub, email }: any) {
+    const userId = sub;
+    const check = await this.checkUser.handle(userId);
+
+    if (!check) {
+      return false;
+    }
+
+    return { userId: sub, email };
   }
 }

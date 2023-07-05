@@ -1,19 +1,19 @@
 import { CreateContactDTO } from '@domain/contact/dtos/create-contact.dto';
 import { Field, InputType } from '@nestjs/graphql';
-import { IsEmail, IsIn, IsNotEmpty, IsString } from 'class-validator';
+import { IsIn, IsNotEmpty, IsString } from 'class-validator';
+import { BasicContactInput } from './basic-contact.input';
 
 @InputType()
-export class CreateContactInput implements CreateContactDTO {
+export class CreateContactInput
+  extends BasicContactInput
+  implements Partial<CreateContactDTO>
+{
   @IsString()
   @IsNotEmpty({ message: 'campo obrigatório' })
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
   @IsIn(['fisica', 'juridica'], { message: 'valor inválido' })
-  @Field()
+  @Field({ defaultValue: 'fisica', nullable: true })
   type: string;
-
-  @IsEmail({}, { message: 'email inválido' })
-  @Field()
-  email: string;
 }

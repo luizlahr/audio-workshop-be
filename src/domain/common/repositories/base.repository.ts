@@ -1,6 +1,14 @@
+type RepositoryIncludeLeveN = { include: RepositoryIncludeLeve1 };
+type RepositoryIncludeLeve1 = Record<string, boolean | RepositoryIncludeLeveN>;
+
 export abstract class BaseRepository<T> {
   protected defaultFilter: any = { deleted_at: null };
   protected model: any;
+  public include: RepositoryIncludeLeve1;
+
+  public setInclude(relations: Record<string, boolean>): void {
+    this.include = relations;
+  }
 
   public withDeleted = (): this => {
     this.defaultFilter = {
@@ -19,12 +27,14 @@ export abstract class BaseRepository<T> {
       where: {
         ...this.defaultFilter,
       },
+      include: this.include,
     });
   }
 
-  public async getById(id: string): Promise<T | null> {
+  public async getById<P = string>(id: P): Promise<T | null> {
     return this.model.findFirst({
       where: { id, ...this.defaultFilter },
+      include: this.include,
     });
   }
 
@@ -33,6 +43,7 @@ export abstract class BaseRepository<T> {
       data: {
         ...modelData,
       },
+      include: this.include,
     });
   }
 
@@ -42,6 +53,7 @@ export abstract class BaseRepository<T> {
       data: {
         ...modelData,
       },
+      include: this.include,
     });
 
     return updatedModel;
@@ -53,6 +65,7 @@ export abstract class BaseRepository<T> {
       data: {
         deleted_at: new Date(),
       },
+      include: this.include,
     });
   }
 }

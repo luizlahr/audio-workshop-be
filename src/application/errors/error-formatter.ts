@@ -1,16 +1,20 @@
 import { CustomError } from '@domain/common/errors/custom.error';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
-import path from 'node:path';
 
 export const ErrorFormatter = (
   formattedError: GraphQLFormattedError,
   error: GraphQLError,
 ) => {
+  if (process.env.ENV === 'dev') {
+    console.log(
+      `${formattedError?.path ?? error?.extensions?.code} | ERROR => `,
+      JSON.stringify({
+        ...error,
+      }),
+    );
+  }
+
   if (error.originalError instanceof CustomError) {
-    const scriptName = path.basename(__filename);
-    if (process.env.ENV === 'dev') {
-      console.log(`${scriptName} | Error`, error);
-    }
     return new GraphQLError(error.originalError.message, {
       extensions: {
         ...error.extensions,
@@ -18,5 +22,15 @@ export const ErrorFormatter = (
       },
     });
   }
+
+  if (error.extensions.code === 'BAD_USER_INPUT') {
+    return new GraphQLError('BAD USER REQUEST', {
+      extensions: {
+        code: 'BAD_USER_REQUEST',
+        original: error.message.replace(/\"/g, ''),
+      },
+    });
+  }
+
   return error.originalError;
 };

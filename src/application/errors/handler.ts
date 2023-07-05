@@ -7,7 +7,6 @@ import { GraphQLError } from 'graphql';
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(exception: unknown): GraphQLError {
-    console.log(exception);
     if (process.env.ENV === 'dev') {
       console.log(exception);
     }

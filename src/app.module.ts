@@ -1,13 +1,13 @@
-import { Module } from '@nestjs/common';
-import { ApplicationModule } from './application/application.module';
-import { SupportModule } from './support/support.module';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { join } from 'node:path';
 import { ErrorFormatter } from '@application/errors/error-formatter';
 import { AllExceptionsFilter } from '@application/errors/handler';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'node:path';
+import { ApplicationModule } from './application/application.module';
+import { SupportModule } from './support/support.module';
 
 @Module({
   imports: [
@@ -27,6 +27,10 @@ import { APP_FILTER } from '@nestjs/core';
       provide: APP_FILTER,
       useClass: AllExceptionsFilter,
     },
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: JwtAuthGuard,
+    // },
   ],
 })
 export class AppModule {}

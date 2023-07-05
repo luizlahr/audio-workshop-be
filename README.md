@@ -1,73 +1,114 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<h1>Audio Workshop Management App (Backend)</h1>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<p>A Node.js project built with NestJS, Prisma, GraphQL, Apollo Server, JWT, Passport, TypeScript, and Docker.</p>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<h2>Description</h2>
 
-## Description
+<p>This project serves as a template for building a Node.js application with a clear architecture, utilizing modern technologies and best practices. It leverages NestJS as the framework for creating scalable and maintainable server-side applications. Prisma is used as the ORM (Object-Relational Mapping) tool to interact with the database. GraphQL is implemented using Apollo Server for efficient data fetching and manipulation. JWT (JSON Web Tokens) and Passport are employed for authentication and authorization purposes. The entire codebase is written in TypeScript, which enhances the development process with static typing and improved maintainability. Docker is used for containerizing the application, making it easy to deploy and manage.</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+<h2>Features</h2>
 
-## Installation
+<ul>
+<li><strong>NestJS</strong>: A progressive Node.js framework for building efficient and scalable server-side applications.</li>
+<li><strong>Prisma</strong>: A modern database toolkit that provides an ORM and a query builder to interact with databases.</li>
+<li><strong>GraphQL</strong>: A query language for APIs that enables clients to request specific data and manipulate it efficiently.</li>
+<li><strong>Apollo Server</strong>: An open-source, community-driven GraphQL server that works seamlessly with any GraphQL schema.</li>
+<li><strong>JWT</strong>: JSON Web Tokens are used for authentication and authorization, providing a secure and stateless authentication mechanism.</li>
+<li><strong>Passport</strong>: A popular authentication middleware for Node.js that supports various authentication strategies and integrates well with Express and NestJS.</li>
+<li><strong>TypeScript</strong>: A typed superset of JavaScript that enhances development with static typing and improved maintainability.</li>
+<li><strong>Docker</strong>: A platform for developing, shipping, and running applications using containerization technology.</li>
+</ul>
 
-```bash
-$ npm install
-```
+<h2>Installation</h2>
 
-## Running the app
+<ol>
+<li>Clone the repository: <code>git clone https://github.com/luizlahr/be-bortolotti-nest.git</code></li>
+<li>Navigate to the project directory: <code>cd be-bortolotti-nest</code></li>
+<li>Install the dependencies: <code>npm install</code></li>
+</ol>
 
-```bash
-# development
-$ npm run start
+<h2>Configuration</h2>
 
-# watch mode
-$ npm run start:dev
+<ol>
+<li>Rename the <code>.env.example</code> file to <code>.env</code>.</li>
+<li>Open the <code>.env</code> file and update the configuration values according to your environment.</li>
+</ol>
 
-# production mode
-$ npm run start:prod
-```
+<h2>Usage</h2>
 
-## Test
+<ol>
+<li>Start the development server: <code>npm run dev</code></li>
+<li>The server will be running at <a href="http://localhost:3333">http://localhost:3333</a> by default.</li>
+<li>Access the <a href="http://localhost:3333/graphql">GraphQL Playground</a> (http://localhost:3333/graphql) to interact with the API.</li>
+</ol>
 
-```bash
-# unit tests
-$ npm run test
+<h2>Docker</h2>
 
-# e2e tests
-$ npm run test:e2e
+<ol>
+<li>Build and run the Docker image: <code>docker-compose up --build -d</code></li>
+</ol>
 
-# test coverage
-$ npm run test:cov
-```
+<h2>Folder Structure</h2>
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+<p>The project follows a application / domain / support folder structure, separating concerns and providing a clear architecture.</p>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<pre>
+.
+├── .docker
+│   ├── pgdata
+├── prisma
+├── src
+│   ├── application
+│   │   ├── controllers
+│   │   ├── decorators
+│   │   ├── errors
+│   │   ├── guards
+│   │   ├── inputs
+│   │   ├── models
+│   │   ├── outputs
+│   │   ├── providers
+│   │   ├── resolvers
+│   │   ├── strategies
+│   │   ├── validators
+│   ├── domain
+│   │   ├── auth
+│   │   ├── common
+│   │   ├── contact
+│   │   │   ├── actions
+│   │   │   ├── dtos
+│   │   │   ├── errors
+│   │   │   ├── models
+│   │   │   ├── repositories
+│   │   ├── equipment
+│   │   ├── order
+│   │   ├── user
+│   ├── support
+│   │   ├── db
+│   │   │   ├── models
+│   │   │   ├── repositories
+│   ├── services
+└── ...
+</pre>
 
-## License
+<h2>License</h2>
 
-Nest is [MIT licensed](LICENSE).
+<p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
+
+<h2>Contributing</h2>
+
+<p>Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.</p>
+
+<h2>Acknowledgments</h2>
+
+<ul>
+<li>NestJS: <a href="https://nestjs.com/">https://nestjs.com/</a></li>
+<li>Prisma: <a href="https://www.prisma.io/">https://www.prisma.io/</a></li>
+<li>GraphQL: <a href="https://graphql.org/">https://graphql.org/</a></li>
+<li>Apollo Server: <a href="https://www.apollographql.com/">https://www.apollographql.com/</a></li>
+<li>JWT: <a href="https://jwt.io/">https://jwt.io/</a></li>
+<li>Passport: <a href="http://www.passportjs.org/">http://www.passportjs.org/</a></li>
+<li>TypeScript: <a href="https://www.typescriptlang.org/">https://www.typescriptlang.org/</a></li>
+<li>Docker: <a href="https://www.docker.com/">https://www.docker.com/</a></li>
+</ul>
